@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Pinterest Clon</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/style.css" />
+</head>
+  <body>
+    <nav class="navbar">
+    <div class="navbar-logo">
+    <img src="/src/assets/Pinterest-logo.png" alt="Logo" />
+    </div>
+  <button class="navbar-toggle" aria-label="Abrir menú">
+    &#9776;
+  </button>
+    <ul class="navbar-menu">
+      <li><a href="#" class="active">Inicio</a></li>
+      <li><a href="#">Explorar</a></li>
+      <li><a href="#">Crear</a></li>
+    </ul>
+     <div class="navbar-icons">
+    <img src="/src/assets/user icon.webp" alt="Usuario" title="Usuario" class="navbar-icon-img" />
+  <img src="/src/assets/message_icon.webp" alt="Chat" title="Chat" class="navbar-icon-img" />
+  <img src="/src/assets/notif_icon.png" alt="Notificaciones" title="Notificaciones" class="navbar-icon-img" />
+</div>
+  </nav>
+    <div id="app">
+  </div>
+    <script type="module" src="src/main.js"></script>
+    <div id="loader" style="display:none;">Cargando imágenes...</div>
+    <script>
+  const toggle = document.querySelector('.navbar-toggle');
+  const menu = document.querySelector('.navbar-menu');
+  toggle.addEventListener('click', () => {
+    menu.classList.toggle('active');
+  });
+</script>
+  </body>
+</html>
