@@ -6,31 +6,33 @@ import { createImageCard } from './components/ImageCard.js';
 const app = document.querySelector('#app');
 const loader = document.querySelector('#loader');
 
-// Navbar: mover el toggle aquí (no inline en HTML)
+// Navbar
 const toggleBtn = document.querySelector('.navbar-toggle');
 const navMenu = document.querySelector('.navbar-menu');
 toggleBtn.addEventListener('click', () => {
   navMenu.classList.toggle('active');
 });
 
-// Estado de búsqueda/paginación
-const INITIAL_QUERY = 'popular'; // estado inicial que verá el usuario
+// paginación
+const INITIAL_QUERY = 'popular'; 
 let currentQuery = INITIAL_QUERY;
 let currentPage = 1;
 const PER_PAGE = 12;
 
-// Inyectar componentes
+
 const gallery = createGallery();
 app.appendChild(gallery);
 
 const searchBar = createSearchBar((query) => {
-  // callback cuando se hace submit en la barra
   currentQuery = query;
   currentPage = 1;
   searchImages(currentQuery, currentPage);
   loadMoreBtn.classList.remove('hidden');
 });
-app.insertBefore(searchBar, gallery);
+
+
+const navbar = document.querySelector('.navbar');
+navbar.appendChild(searchBar);
 
 // Botón "Cargar más"
 const loadMoreBtn = document.createElement('button');
@@ -43,7 +45,7 @@ loadMoreBtn.addEventListener('click', () => {
   searchImages(currentQuery, currentPage);
 });
 
-// Click en el logo → volver al estado inicial
+
 const logo = document.querySelector('.navbar-logo img');
 logo.addEventListener('click', () => {
   currentQuery = INITIAL_QUERY;
@@ -52,14 +54,14 @@ logo.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// Llamada a la API de Unsplash
+
 async function searchImages(query, page = 1) {
   const accessKey = 'HEvt3zzZIYcPZrhjlW10gxS2i85xoexXmgyg1GWRYXM'; // usa variables de entorno en producción
   const url = `https://api.unsplash.com/search/photos?query=${encodeURIComponent(
     query
   )}&page=${page}&per_page=${PER_PAGE}&client_id=${accessKey}`;
 
-  // Mostrar loader
+
   loader.classList.remove('hidden');
 
   try {
@@ -68,15 +70,13 @@ async function searchImages(query, page = 1) {
 
     const data = await response.json();
 
-    // Ocultar loader
+
     loader.classList.add('hidden');
 
     if (data.results && data.results.length > 0) {
-      // Si es la primera página, reemplazamos; si no, agregamos
       const append = page > 1;
       renderImages(gallery, data.results, createImageCard, append);
 
-      // Mostrar/ocultar "Cargar más" (si no recibimos nada, lo ocultamos)
       if (data.results.length < PER_PAGE) {
         loadMoreBtn.classList.add('hidden');
       } else {
@@ -92,9 +92,7 @@ async function searchImages(query, page = 1) {
     loader.classList.add('hidden');
     gallery.innerHTML = '<p>Error al cargar imágenes.</p>';
     loadMoreBtn.classList.add('hidden');
-    // Opcional: console.error(error);
   }
 }
 
-// Cargar estado inicial al abrir la app
 searchImages(INITIAL_QUERY, 1);
