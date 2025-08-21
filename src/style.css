@@ -200,6 +200,11 @@ button:hover { background-color: var(--color-primary-hover); }
 .image-container { position: relative; width: 100%; }
 .image-container img { display: block; }
 
+.image-container:hover img{
+  opacity: 0.9;
+  transition: opacity 0.2s ease;
+}
+
 .card-details {
   margin-top: 0.8rem;
   font-size: 0.9rem;
