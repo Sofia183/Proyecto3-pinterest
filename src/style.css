@@ -188,6 +188,7 @@ button:hover { background-color: var(--color-primary-hover); }
   border-radius: 12px;
   transition: transform 0.2s ease;
   padding: 0;
+  break-inside: avoid;
 }
 .image-card:hover { transform: translateY(-4px); }
 
@@ -195,6 +196,7 @@ button:hover { background-color: var(--color-primary-hover); }
   width: 100%;
   border-radius: 8px;
   object-fit: cover;
+  height: auto;
 }
 
 .image-container { position: relative; width: 100%; }
