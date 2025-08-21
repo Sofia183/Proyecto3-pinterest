@@ -4,7 +4,7 @@ export function createImageCard(image) {
 
   const borderColor = `hsl(${Math.floor(Math.random() * 360)}, 80%, 60%)`;
 
-card.innerHTML = `
+  card.innerHTML = `
     <div class="image-container">
       <img src="${image.urls.small}" alt="${image.alt_description || ''}">
       <img 
@@ -18,7 +18,7 @@ card.innerHTML = `
       <h2 class="creator-name">${image.user.name}</h2>
       <div class="creator-meta">
         <span class="creator-likes">${image.likes} likes</span>
-        <a href="${image.user.links.html}" class="creator-link" target="_blank">Ver perfil</a>
+        <a href="${image.user.links.html}" class="creator-link" target="_blank" rel="noopener noreferrer">Ver perfil</a>
       </div>
     </div>
   `;
