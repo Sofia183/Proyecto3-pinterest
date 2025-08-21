@@ -289,6 +289,14 @@ button:hover { background-color: var(--color-primary-hover); }
 .creator-link:hover { text-decoration: underline; }
 
 
+.navbar form{
+  flex: 1;
+  display: flex;
+  gap: 0.5rem;
+  max-width: 520px;
+  margin: 0 1rem;
+}
+
 @media (max-width: 700px) {
   .navbar {
     display: flex;
@@ -297,6 +305,13 @@ button:hover { background-color: var(--color-primary-hover); }
     flex-direction: row;
     padding: 0.7rem 1rem;
     position: relative;
+  }
+
+    .navbar form{
+    order: 4;
+    width: 100%;
+    max-width: none;
+    margin: 0.5rem 0 0;
   }
 
   .navbar-logo { order: 1; margin-left: 0; }
