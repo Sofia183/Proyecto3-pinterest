@@ -14,4 +14,3 @@ export function renderImages(gallery, images, createImageCard, append = false) {
     gallery.appendChild(card);
   });
 }
-
