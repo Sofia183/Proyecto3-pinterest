@@ -1,5 +1,15 @@
 * { box-sizing: border-box; }
 
+:root{
+  --color-primary: #bd081c;
+  --color-primary-hover: #a50718;
+  --color-accent: #e60023;
+  --color-accent-hover: #c4001f;
+  --color-bg: #fafafa;
+  --color-text: #333;
+  --color-chip: #ffe5ea;
+}
+
 html, body {
   margin: 0;
   padding: 0;
