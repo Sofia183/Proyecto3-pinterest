@@ -12,8 +12,7 @@ export function createSearchBar(onSearch) {
     const query = input.value.trim();
     if (query) {
       onSearch(query);
-      // Requisito: limpiar el input tras la búsqueda
-      input.value = '';
+      input.value = ''; // Requisito: limpiar input tras buscar
     }
   });
 
