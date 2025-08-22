@@ -4,11 +4,11 @@ export function createImageCard(image) {
 
   const borderColor = `hsl(${Math.floor(Math.random() * 360)}, 80%, 60%)`;
 
-  // Algunos campos (como "views") pueden no venir en /search/photos.
-  // Si no vienen, mostramos "—". Si quieres datos reales de vistas,
-  // habría que hacer una petición extra a /photos/:id/statistics (cuidado con el rate limit).
   const likes = typeof image.likes === 'number' ? image.likes : '—';
-  const views = (typeof image.views === 'number' && image.views >= 0) ? image.views : '—';
+  // Vistas reales traídas por /statistics en main.js → image._stats?.views
+  const views = (image._stats && typeof image._stats.views === 'number')
+    ? image._stats.views
+    : '—';
 
   card.innerHTML = `
     <div class="image-container">
@@ -23,8 +23,8 @@ export function createImageCard(image) {
     <div class="creator-profile">
       <h2 class="creator-name">${image.user.name}</h2>
       <div class="creator-meta">
-        <span class="creator-likes">❤️ ${likes}</span>
-        <span class="creator-views">👁️ ${views}</span>
+        <span class="badge">❤️ ${likes}</span>
+        <span class="badge">👁️ ${views}</span>
         <a href="${image.links.html}" class="creator-link" target="_blank" rel="noopener noreferrer">
           Ver en Unsplash
         </a>
