@@ -128,3 +128,28 @@ main#app { max-width: 1200px; margin: 0 auto; }
   .navbar form{ order: 4; width: 100%; max-width: none; margin: 0.5rem 0 0; }
   .creator-avatar { width: 50px !important; height: 28px !important; }
 }
+
+ .creator-meta {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    margin: 0;              
+    display: flex;
+    gap: 6px;
+    z-index: 3;            
+  }
+
+  .creator-meta .badge {
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    line-height: 1;
+  }
+
+  .creator-avatar {
+    width: 40px !important;
+    height: 40px !important;
+  }
+}
