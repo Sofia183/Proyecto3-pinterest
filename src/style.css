@@ -126,5 +126,5 @@ main#app { max-width: 1200px; margin: 0 auto; }
   }
   .navbar-menu.active { display: flex; }
   .navbar form{ order: 4; width: 100%; max-width: none; margin: 0.5rem 0 0; }
-  .creator-avatar { width: 28px !important; height: 28px !important; }
+  .creator-avatar { width: 50px !important; height: 28px !important; }
 }
