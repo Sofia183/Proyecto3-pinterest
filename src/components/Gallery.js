@@ -6,9 +6,7 @@ export function createGallery() {
 }
 
 export function renderImages(gallery, images, createImageCard, append = false) {
-  if (!append) {
-    gallery.innerHTML = '';
-  }
+  if (!append) gallery.innerHTML = '';
   images.forEach(image => {
     const card = createImageCard(image);
     gallery.appendChild(card);
