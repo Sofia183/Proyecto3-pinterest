@@ -3,13 +3,9 @@ import { createSearchBar } from './components/SearchBar.js';
 import { createGallery, renderImages } from './components/Gallery.js';
 import { createImageCard } from './components/ImageCard.js';
 
-// ---------------------
-// API KEY (rúbrica .env)
-// ---------------------
-// Crea un archivo .env en la raíz con: VITE_UNSPLASH_ACCESS_KEY=TU_CLAVE
+
 const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
 
-// Control si falta la clave (para no confundir al usuario)
 function ensureAccessKey() {
   if (!accessKey) {
     const msg = document.createElement('p');
@@ -22,24 +18,20 @@ function ensureAccessKey() {
 }
 ensureAccessKey();
 
-// ---------------------
-// Inyección del layout
-// ---------------------
+
 function createNavbar() {
   const nav = document.createElement('nav');
   nav.className = 'navbar';
 
-  // Logo
   const logoWrap = document.createElement('div');
   logoWrap.className = 'navbar-logo';
   const logo = document.createElement('img');
-  // Usa tus rutas actuales de assets. Si los mueves a /public, cambia a '/Pinterest-logo.png'
+  
   logo.src = '/src/assets/Pinterest-logo.png';
   logo.alt = 'Logo';
   logo.title = 'Volver al inicio';
   logoWrap.appendChild(logo);
 
-  // Toggle
   const toggle = document.createElement('button');
   toggle.className = 'navbar-toggle';
   toggle.setAttribute('aria-label', 'Abrir menú');
@@ -76,7 +68,7 @@ function createNavbar() {
 
   nav.append(logoWrap, toggle, menu, icons);
 
-  // Toggle menú (móvil)
+  // Toggle menú
   toggle.addEventListener('click', () => {
     menu.classList.toggle('active');
   });
@@ -98,7 +90,6 @@ function createLoader() {
   return loader;
 }
 
-// Montar layout
 const { nav, logo } = createNavbar();
 const main = createMain();
 const loader = createLoader();
@@ -106,19 +97,16 @@ document.body.prepend(nav);
 document.body.appendChild(main);
 document.body.appendChild(loader);
 
-// ---------------------
+
 // Estado y componentes
-// ---------------------
 const INITIAL_QUERY = 'popular';
 let currentQuery = INITIAL_QUERY;
 let currentPage = 1;
 const PER_PAGE = 12;
 
-// Galería dentro de <main>
 const gallery = createGallery();
 main.appendChild(gallery);
 
-// Buscador: se agrega a la navbar
 const searchBar = createSearchBar((query) => {
   currentQuery = query;
   currentPage = 1;
@@ -127,7 +115,6 @@ const searchBar = createSearchBar((query) => {
 });
 nav.appendChild(searchBar);
 
-// Cargar más
 const loadMoreBtn = document.createElement('button');
 loadMoreBtn.textContent = 'Cargar más';
 loadMoreBtn.className = 'load-more-btn hidden';
@@ -138,7 +125,6 @@ loadMoreBtn.addEventListener('click', () => {
   searchImages(currentQuery, currentPage);
 });
 
-// Reset al estado inicial con el logo
 logo.addEventListener('click', () => {
   currentQuery = INITIAL_QUERY;
   currentPage = 1;
@@ -146,17 +132,15 @@ logo.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
 
-// ---------------------
+
 // Fetch a Unsplash
-// ---------------------
 async function fetchJSON(url) {
   const res = await fetch(url);
   if (!res.ok) throw new Error(`HTTP ${res.status}`);
   return res.json();
 }
 
-// Enriquecer cada imagen con sus estadísticas (views)
-// Nota: endpoint: /photos/:id/statistics → views.total
+
 async function enrichWithStats(images) {
   const enriched = await Promise.all(images.map(async (img) => {
     try {
@@ -175,23 +159,19 @@ async function searchImages(query, page = 1) {
     query
   )}&page=${page}&per_page=${PER_PAGE}&client_id=${accessKey}`;
 
-  // Mostrar loader
   loader.classList.remove('hidden');
 
   try {
     const data = await fetchJSON(url);
 
-    // Enriquecer con vistas reales
     const results = data.results ?? [];
     const enriched = await enrichWithStats(results);
 
     loader.classList.add('hidden');
 
     if (enriched.length > 0) {
-      // append si page>1
       renderImages(gallery, enriched, createImageCard, page > 1);
 
-      // Mostrar/ocultar "Cargar más"
       if (enriched.length < PER_PAGE) {
         loadMoreBtn.classList.add('hidden');
       } else {
@@ -207,9 +187,7 @@ async function searchImages(query, page = 1) {
     loader.classList.add('hidden');
     gallery.innerHTML = '<p>Error al cargar imágenes.</p>';
     loadMoreBtn.classList.add('hidden');
-    // console.error(error);
   }
 }
 
-// Carga inicial
 searchImages(INITIAL_QUERY, 1);
