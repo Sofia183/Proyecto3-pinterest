@@ -129,27 +129,47 @@ main#app { max-width: 1200px; margin: 0 auto; }
   .creator-avatar { width: 50px !important; height: 28px !important; }
 }
 
- .creator-meta {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    margin: 0;              
+  .creator-meta {
+    position: static;        
+    margin-top: 0.2rem;
     display: flex;
-    gap: 6px;
-    z-index: 3;            
+    gap: 0.75rem;
+    align-items: center;
+    justify-content: center;  
   }
 
   .creator-meta .badge {
+    position: absolute;
+    top: 8px;
+    z-index: 3;               
     background: rgba(0, 0, 0, 0.6);
     color: #fff;
     padding: 4px 8px;
     border-radius: 999px;
     font-size: 0.8rem;
     line-height: 1;
+    pointer-events: none;     
   }
 
   .creator-avatar {
     width: 40px !important;
     height: 40px !important;
+  }
+
+  .image-card {
+    position: relative;
+  }
+
+  .creator-meta .badge:first-of-type {
+    right: 8px;
+  }
+
+  .creator-meta .badge:last-of-type {
+    left: 8px;
+  }
+
+  .creator-avatar {
+    width: 56px !important;
+    height: 56px !important;
   }
 }
