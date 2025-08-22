@@ -129,6 +129,10 @@ main#app { max-width: 1200px; margin: 0 auto; }
   .creator-avatar { width: 50px !important; height: 28px !important; }
 }
 
+  .image-container {
+    position: relative;
+  }
+
   .creator-meta {
     position: static;        
     margin-top: 0.2rem;
@@ -141,14 +145,14 @@ main#app { max-width: 1200px; margin: 0 auto; }
   .creator-meta .badge {
     position: absolute;
     top: 8px;
-    z-index: 3;               
     background: rgba(0, 0, 0, 0.6);
     color: #fff;
     padding: 4px 8px;
     border-radius: 999px;
     font-size: 0.8rem;
     line-height: 1;
-    pointer-events: none;     
+    z-index: 3;
+    pointer-events: none;
   }
 
   .creator-avatar {
