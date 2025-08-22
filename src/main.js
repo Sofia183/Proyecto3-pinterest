@@ -1,4 +1,4 @@
-import '/style.css';
+import './style.css';
 import { createSearchBar } from './components/SearchBar.js';
 import { createGallery, renderImages } from './components/Gallery.js';
 import { createImageCard } from './components/ImageCard.js';
